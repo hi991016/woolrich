@@ -1,0 +1,223 @@
+/* -------------------------------------------------------------------------- */
+/*                                  home page                                 */
+/* -------------------------------------------------------------------------- */
+
+.homepage {
+  // ===== fv ====
+  .fv {
+    &_container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &_content {
+      &_title {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        mix-blend-mode: multiply;
+
+        & > div {
+          width: 80.972%;
+          position: absolute;
+          top: 48%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        picture {
+          padding-bottom: calc(531.34 / 583 * 100%);
+        }
+      }
+
+      &_desc {
+        margin: 130px auto 0;
+        padding: 0 var(--p-sp);
+
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 3.12;
+        text-align: center;
+      }
+    }
+
+    &_fixed {
+      position: sticky;
+      top: 0;
+      height: var(--app-height);
+    }
+
+    &_images {
+      position: relative;
+      width: 100%;
+      z-index: 2;
+      mix-blend-mode: multiply;
+
+      &_gif {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: 0 64px 0 10px;
+
+        picture {
+          padding-bottom: min(88.916vh, calc(722 / 646 * 100%));
+        }
+      }
+
+      &_tree {
+        position: absolute;
+        bottom: -1.389vw;
+        left: 0;
+        width: 19.236vw;
+        z-index: 2;
+
+        picture {
+          padding-bottom: calc(213 / 277 * 100%);
+        }
+      }
+    }
+
+    @include maxW {
+      &_container {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      &_content {
+        &_desc {
+          margin-top: 95px;
+          font-size: 1.3rem;
+          line-height: 2.62;
+        }
+      }
+
+      &_fixed {
+        position: initial;
+      }
+
+      &_inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 20px 25px;
+      }
+
+      &_images {
+        mix-blend-mode: normal;
+
+        &_title {
+          picture {
+            padding-bottom: calc(162.75 / 374 * 100%);
+          }
+        }
+
+        &_gif {
+          margin-top: 10px;
+          position: initial;
+          padding: 0 6px 0 4px;
+          flex: 1;
+          display: flex;
+
+          picture {
+            flex: 1;
+            padding-bottom: initial;
+          }
+        }
+
+        &_brand {
+          width: 46.377vw;
+          margin: 0 5px 0 auto;
+
+          picture {
+            padding-bottom: calc(20.56 / 192 * 100%);
+          }
+        }
+
+        &_tree {
+          position: fixed;
+          bottom: -3.382vw;
+          left: 13px;
+          width: 39.614vw;
+
+          picture {
+            padding-bottom: calc(125 / 164 * 100%);
+            mix-blend-mode: normal;
+          }
+        }
+      }
+    }
+  }
+
+  // ===== diary =====
+  .diary {
+    &_container {
+      padding-top: 188px;
+    }
+
+    &_illust {
+      padding: 200px 10.167vw 0 7.535vw;
+
+      &_images {
+        margin: 0 auto;
+
+        picture {
+          padding-bottom: calc(738 / 1185.11 * 100%);
+        }
+      }
+    }
+
+    &_profile {
+      margin-top: 120px;
+
+      &_inner {
+        width: 100%;
+        min-height: 410px;
+        display: grid;
+        grid-template-columns: 18.056vw 1fr;
+        align-items: center;
+        gap: 77px;
+        padding: 75px 80px;
+
+        background: #f0ebde;
+        border-radius: 60px;
+      }
+
+      &_ava {
+        border-radius: 100%;
+        background: var(--white-cl);
+      }
+
+      &_content {
+      }
+    }
+
+    @include maxW {
+      &_container {
+        padding-top: 140px;
+      }
+
+      &_illust {
+        padding: 80px 0 0 0;
+
+        &_images {
+          picture {
+            padding-bottom: calc(573 / 414 * 100%);
+          }
+        }
+
+        &_content {
+          margin-top: 45px;
+          font-size: 1.3rem;
+          line-height: 1.7;
+        }
+      }
+    }
+  }
+
+  // ===== timeline =====
+  .timeline {
+    height: 200vh;
+  }
+}

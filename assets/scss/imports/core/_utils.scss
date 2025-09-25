@@ -1,0 +1,47 @@
+/* Utils
+------------------------------------------------------------*/
+/* padding */
+.u-pad {
+  padding: 0 var(--p);
+
+  @include maxW {
+    padding: 0 var(--p-sp);
+  }
+}
+
+/* font family */
+.montserrat-medium {
+  font-family: var(--en-fonts);
+  font-weight: 500;
+}
+
+.montserrat-semibold {
+  font-family: var(--en-fonts);
+  font-weight: 600;
+}
+
+/* lazy load */
+img.lazy {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+/* only device */
+.sp-only,
+.is-hidden {
+  display: none !important;
+}
+
+@include maxW {
+  .pc-only {
+    display: none !important;
+  }
+
+  .sp-only {
+    display: block !important;
+  }
+}

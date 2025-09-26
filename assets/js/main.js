@@ -172,7 +172,7 @@ const handleTimeline = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0) {
             const index = Array.from(sections).indexOf(entry.target);
             if (index !== -1) {
               clearCurrent();
@@ -183,8 +183,8 @@ const handleTimeline = () => {
       },
       {
         root: null,
-        rootMargin: "0px 0px -60% 0px", // trigger when the several is 40% on the screen
-        threshold: 0.4,
+        rootMargin: "0px 0px -95% 0px", // chỉ kích khi đầu section gần top
+        threshold: 0,
       }
     );
 

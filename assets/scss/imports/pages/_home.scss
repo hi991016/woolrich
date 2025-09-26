@@ -105,8 +105,6 @@
       }
 
       &_images {
-        mix-blend-mode: normal;
-
         &_title {
           picture {
             padding-bottom: calc(162.75 / 374 * 100%);
@@ -283,6 +281,10 @@
       display: grid;
       grid-template-columns: 21.389vw 1fr;
       gap: min(6.389vw, 92px);
+
+      @include maxW {
+        display: block;
+      }
     }
 
     &_timeline {
@@ -307,6 +309,8 @@
             height: 2px;
 
             &.--current {
+              opacity: 1;
+
               span {
                 opacity: 1;
                 visibility: visible;
@@ -350,6 +354,46 @@
               opacity: 0.3;
               transition: opacity 0.2s ease-in-out;
               will-change: opacity;
+            }
+          }
+        }
+      }
+
+      @include maxW {
+        position: sticky;
+        top: 20px;
+        padding: 0 var(--p-sp);
+        overflow: hidden;
+
+        &_list {
+          position: initial;
+
+          h2 {
+            font-size: 2.4rem;
+          }
+
+          ul {
+            margin-top: initial;
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 95px;
+            transform: translateY(-50%);
+
+            li {
+              position: absolute;
+              top: 0;
+              opacity: 0;
+              
+              &:before {
+                width: 15px;
+                transition: unset;
+              }
+
+              span {
+                font-size: 1.4rem;
+                left: 30px;
+              }
             }
           }
         }

@@ -18,3 +18,56 @@
     object-fit: contain;
   }
 }
+
+.c-vertical-l {
+  margin: 120px auto;
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--white-cl);
+  border-radius: 60px;
+
+  @include maxW {
+    margin: 80px auto 70px;
+  }
+}
+
+.c-reservation {
+  position: fixed;
+  bottom: 0;
+  left: 28px;
+  width: calc(21.389vw - 28px);
+  z-index: 10;
+
+  opacity: 0;
+  pointer-events: none;
+
+  a {
+    width: 100%;
+    min-height: 71px;
+    background: var(--black-cl);
+    border-radius: 30px 30px 0 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.4rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--white-cl);
+  }
+
+  @include maxW {
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+
+    a {
+      min-height: 60px;
+      border-radius: 15px 15px 0 0;
+
+      font-size: 1.3rem;
+    }
+  }
+}

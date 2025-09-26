@@ -63,27 +63,34 @@ const initGsap = () => {
   ScrollTrigger.getAll().forEach((st) => st.kill());
 
   // # change bg
+  const sections = gsap.utils.toArray("[data-bgcolor]");
   const defaultColor = getComputedStyle(document.body).backgroundColor;
-  document.querySelectorAll("[data-bg]").forEach((panel) => {
-    let color = panel.dataset.bg;
+
+  const switchColor = (color) => {
+    gsap.to(document.body, {
+      duration: 0.3,
+      ease: "power1.inOut",
+      backgroundColor: color,
+    });
+  };
+
+  sections.forEach((section, i) => {
+    const color = section.dataset.bgcolor;
+    const previousColor = sections[i - 1]
+      ? sections[i - 1].dataset.bgcolor
+      : defaultColor;
+
     ScrollTrigger.create({
-      trigger: panel,
+      trigger: section,
       start: "top top",
       end: "bottom top",
-      markers: false,
+      onEnter: () => switchColor(color),
+      onEnterBack: () => i === sections.length - 1 && switchColor(color),
+      onLeave: () => i === sections.length - 1 && switchColor(defaultColor),
+      onLeaveBack: () => switchColor(previousColor),
+      id: i + 1,
       invalidateOnRefresh: true,
-      onEnter: () =>
-        gsap.to("body", {
-          duration: 0.3,
-          ease: "power1.inOut",
-          backgroundColor: color,
-        }),
-      onLeaveBack: () =>
-        gsap.to("body", {
-          duration: 0.3,
-          ease: "power1.inOut",
-          backgroundColor: defaultColor,
-        }),
+      markers: false,
     });
   });
 
@@ -102,6 +109,22 @@ const initGsap = () => {
         toggleActions: "play none none reverse",
       },
     });
+  });
+
+  // # show reservation
+  gsap.to("[data-reservation]", {
+    autoAlpha: 1,
+    pointerEvents: "auto",
+    duration: 0.3,
+    ease: "sine.inOut",
+    scrollTrigger: {
+      trigger: "[data-trigger-reservation]",
+      start: "top top",
+      end: "bottom top",
+      markers: false,
+      invalidateOnRefresh: true,
+      toggleActions: "play none none reverse",
+    },
   });
 
   // force trigger
@@ -132,6 +155,43 @@ resizeObserver.observe(document.documentElement, {
 "load pageshow".split(" ").forEach((evt) => {
   window.addEventListener(evt, initGsap);
 });
+
+// ===== timeline =====
+const handleTimeline = () => {
+  document.querySelectorAll("[data-story]").forEach((story) => {
+    const sections = story.querySelectorAll("[data-story-article] section"),
+      timelineItems = story.querySelectorAll("[data-story-timeline] li");
+
+    if (!sections.length || !timelineItems.length) return;
+
+    // clear current
+    const clearCurrent = () => {
+      timelineItems.forEach((li) => li.classList.remove("--current"));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(sections).indexOf(entry.target);
+            if (index !== -1) {
+              clearCurrent();
+              timelineItems[index].classList.add("--current");
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -60% 0px", // trigger when the several is 40% on the screen
+        threshold: 0.4,
+      }
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+  });
+};
+handleTimeline();
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);

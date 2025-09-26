@@ -34,7 +34,7 @@
         margin: 130px auto 0;
         padding: 0 var(--p-sp);
 
-        font-size: clamp(1.6rem, 1.111vw, 2.2rem);
+        font-size: 1.6rem;
         font-weight: 700;
         line-height: 3.12;
         text-align: center;
@@ -236,6 +236,42 @@
           margin-top: 45px;
           font-size: 1.3rem;
           line-height: 1.7;
+        }
+      }
+
+      &_profile {
+        margin-top: 57px;
+
+        &_inner {
+          grid-template-columns: 1fr;
+          gap: 30px;
+          padding: 45px 25px 43px 24px;
+          border-radius: 30px;
+        }
+
+        &_ava {
+          width: 41.063vw;
+          margin: 0 auto;
+        }
+
+        &_content {
+          .heading {
+            p {
+              font-size: 1.2rem;
+              margin-left: 2px;
+            }
+
+            h3 {
+              margin-top: 5px;
+              font-size: 1.6rem;
+            }
+          }
+
+          .desc {
+            margin: 28px 0 0 2px;
+            font-size: 1.2rem;
+            line-height: 1.68;
+          }
         }
       }
     }

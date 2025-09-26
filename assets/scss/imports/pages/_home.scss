@@ -34,7 +34,7 @@
         margin: 130px auto 0;
         padding: 0 var(--p-sp);
 
-        font-size: 1.6rem;
+        font-size: clamp(1.6rem, 1.111vw, 2.2rem);
         font-weight: 700;
         line-height: 3.12;
         text-align: center;
@@ -190,6 +190,31 @@
       }
 
       &_content {
+        .heading {
+          p {
+            font-size: 1.4rem;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+            margin-left: 3px;
+          }
+
+          h3 {
+            margin-top: 7px;
+            font-size: 2rem;
+            line-height: 1.45;
+          }
+        }
+
+        .desc {
+          margin: 22px 0 0 3px;
+          font-size: 1.3rem;
+          line-height: 1.75;
+
+          p > a {
+            display: inline-block;
+            text-decoration: underline;
+          }
+        }
       }
     }
 

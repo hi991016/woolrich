@@ -24,7 +24,6 @@ const init = () => {
 const lenis = new Lenis({
   duration: 1.0,
   easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
-  // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smooth: true,
   mouseMultiplier: 1.0,
   smoothTouch: true,
@@ -37,7 +36,9 @@ gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0);
-lenis.on("scroll", ScrollTrigger.update);
+lenis.on("scroll", () => {
+  ScrollTrigger.update();
+});
 
 // ===== app height =====
 const appHeight = () => {
@@ -58,6 +59,9 @@ window.addEventListener("resize", appHeight);
 gsap.registerPlugin(ScrollTrigger);
 
 const initGsap = () => {
+  // # clear old trigger
+  ScrollTrigger.getAll().forEach((st) => st.kill());
+
   // # change bg
   const defaultColor = getComputedStyle(document.body).backgroundColor;
   document.querySelectorAll("[data-bg]").forEach((panel) => {
@@ -67,6 +71,7 @@ const initGsap = () => {
       start: "top top",
       end: "bottom top",
       markers: false,
+      invalidateOnRefresh: true,
       onEnter: () =>
         gsap.to("body", {
           duration: 0.3,
@@ -93,29 +98,39 @@ const initGsap = () => {
         start: "top bottom",
         end: "bottom top",
         markers: false,
+        invalidateOnRefresh: true,
         toggleActions: "play none none reverse",
       },
     });
   });
 
-  // refactor refresh
+  // force trigger
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();
   });
 };
 
-// # reset trigger when resize
+// force refresh triggers
 let resizeTimeout;
 const optimizedResize = () => {
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
-    requestAnimationFrame(initGsap);
+    requestAnimationFrame(() => {
+      appHeight();
+      ScrollTrigger.refresh();
+    });
   }, 200);
 };
 
+// use ResizeObserver with root margin
 const resizeObserver = new ResizeObserver(optimizedResize);
 resizeObserver.observe(document.documentElement, {
   box: "content-box",
+});
+
+// init gsap
+"load pageshow".split(" ").forEach((evt) => {
+  window.addEventListener(evt, initGsap);
 });
 
 // ### ===== DOMCONTENTLOADED ===== ###

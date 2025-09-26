@@ -183,7 +183,7 @@ const handleTimeline = () => {
       },
       {
         root: null,
-        rootMargin: "0px 0px -95% 0px", // chỉ kích khi đầu section gần top
+        rootMargin: "0px 0px -95% 0px", // trigger start/end top section
         threshold: 0,
       }
     );

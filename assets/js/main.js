@@ -77,7 +77,7 @@ const initGsap = () => {
   const defaultColor = getComputedStyle(document.body).backgroundColor;
 
   const switchColor = (color) => {
-    gsap.to(document.body, {
+     gsap.to("[data-bg-layer]", {
       duration: 0.3,
       ease: "power1.inOut",
       backgroundColor: color,
@@ -149,7 +149,7 @@ const initGsap = () => {
       end: "bottom bottom",
       toggleActions: "play none none reverse",
       invalidateOnRefresh: true,
-      markers: true,
+      markers: false,
     },
   });
 

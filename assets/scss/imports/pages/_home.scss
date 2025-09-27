@@ -364,9 +364,11 @@
         top: 20px;
         padding: 0 var(--p-sp);
         overflow: hidden;
+        z-index: 5;
 
         &_list {
-          position: initial;
+          position: relative;
+          top: initial;
 
           h2 {
             font-size: 2.4rem;
@@ -377,14 +379,14 @@
             display: block;
             position: absolute;
             top: 50%;
-            right: 95px;
+            right: 70px;
             transform: translateY(-50%);
 
             li {
               position: absolute;
               top: 0;
               opacity: 0;
-              
+
               &:before {
                 width: 15px;
                 transition: unset;
@@ -401,11 +403,335 @@
     }
 
     &_article {
-      margin: 145px 0 0 0;
-      padding: 0 min(9.135%, 95px) 0 0;
+      padding: 0 var(--p) 0 0;
 
       section {
-        height: 100vh;
+        padding-top: 150px;
+        min-height: 100vh;
+      }
+
+      @include maxW {
+        padding: 0;
+
+        section {
+          padding-top: 100px;
+
+          &:first-child {
+            padding-top: 80px;
+          }
+        }
+      }
+    }
+  }
+
+  // ===== day =====
+  .day {
+    &_container {
+      position: relative;
+      width: 100%;
+    }
+
+    &_title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      &_l {
+        p {
+          font-family: var(--en-fonts);
+          font-size: 2rem;
+          line-height: 1.5;
+          letter-spacing: 0.5px;
+        }
+
+        h2 {
+          margin-top: 5px;
+          font-family: var(--en-fonts);
+          font-size: 3.4rem;
+          font-weight: 500;
+          line-height: 1.2;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      &_r {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.5;
+        writing-mode: vertical-lr;
+
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        p {
+          display: flex;
+          gap: 10px;
+        }
+      }
+
+      @include minW {
+        &.--abs {
+          width: 100%;
+          position: absolute;
+          top: 0;
+          z-index: 2;
+        }
+      }
+
+      @include maxW {
+        padding: 0 var(--p-sp);
+
+        &_l {
+          p {
+            font-size: 1.4rem;
+          }
+
+          h2 {
+            font-size: 2.4rem;
+          }
+        }
+
+        &_r {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  // day01 - checkin
+  .checkin {
+    picture {
+      padding-bottom: calc(1178 / 940 * 100%);
+    }
+
+    @include maxW {
+      padding: 0 0 0 var(--p-sp);
+
+      picture {
+        margin-top: 50px;
+        padding-bottom: calc(945 / 389 * 100%);
+      }
+    }
+  }
+
+  // day01 - dinner
+  .dinner {
+    padding: 0 0 0 8px;
+
+    picture {
+      padding-bottom: calc(956 / 932 * 100%);
+    }
+
+    @include maxW {
+      padding: 0 var(--p-sp);
+
+      picture {
+        margin-top: 35px;
+        padding-bottom: calc(1020 / 364 * 100%);
+      }
+    }
+  }
+
+  // day01 - bath
+  .bath {
+    picture {
+      margin-top: 37px;
+      padding-bottom: calc(616 / 947 * 100%);
+    }
+
+    @include maxW {
+      padding: 0 var(--p-sp);
+
+      picture {
+        margin-top: 51px;
+        padding-bottom: calc(670 / 364 * 100%);
+      }
+    }
+  }
+
+  // day01 - night
+  .night {
+    picture {
+      margin-top: -20px;
+      padding-bottom: calc(1265 / 941.47 * 100%);
+    }
+
+    @include maxW {
+      padding: 0 0 0 var(--p-sp);
+
+      picture {
+        margin-top: 20px;
+        padding-bottom: calc(1652.91 / 389 * 100%);
+      }
+    }
+  }
+
+  .room {
+    margin-top: 80px;
+    width: 100%;
+
+    &_inner {
+      min-height: 687px;
+      border: 10px solid #f0ebde;
+      border-radius: 60px;
+
+      padding: 65px 60px 50px 65px;
+    }
+
+    &_thumb {
+      picture {
+        padding-bottom: calc(486 / 777 * 100%);
+      }
+    }
+
+    &_title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      h3 {
+        font-size: 3.4rem;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        font-size: 2rem;
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    @include maxW {
+      margin-top: 60px;
+      padding: 0 var(--p-sp);
+
+      &_inner {
+        border-radius: 30px;
+        padding: 25px 6px 25px 15px;
+
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 30px;
+      }
+
+      &_thumb {
+        picture {
+          padding-bottom: calc(650 / 331 * 100%);
+        }
+      }
+
+      &_title {
+        gap: 5px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        h3 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  // day02 - breakfast
+  .breakfast {
+    picture {
+      margin-top: 23px;
+      padding-bottom: calc(1076 / 940 * 100%);
+    }
+
+    @include maxW {
+      picture {
+        margin-top: 25px;
+        padding-bottom: calc(861 / 414 * 100%);
+      }
+    }
+  }
+
+  // day02 - checkout
+  .checkout {
+    picture {
+      margin-top: 33px;
+      padding-bottom: calc(1270 / 940 * 100%);
+    }
+
+    &_detail {
+      margin-top: 100px;
+      display: grid;
+      grid-template-columns: 1fr 65.957%;
+      gap: min(6.389vw, 92px);
+
+      &_title {
+        font-size: 2.2rem;
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+      }
+
+      &_content {
+        font-size: 1.4rem;
+        line-height: 1.8;
+
+        .link {
+          margin-top: 45px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+
+          a {
+            width: 100%;
+            min-height: 60px;
+            border-radius: 70px;
+            background: var(--black-cl);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--white-cl);
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    @include maxW {
+      picture {
+        margin-top: 43px;
+        padding-bottom: calc(951 / 414 * 100%);
+      }
+
+      &_detail {
+        margin-top: 25px;
+        padding: 0 var(--p-sp);
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+        &_title {
+          font-size: 1.6rem;
+        }
+
+        &_content {
+          font-size: 1.2rem;
+
+          .link {
+            margin-top: 30px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+
+            a {
+              min-height: 50px;
+              font-size: 1.3rem;
+            }
+          }
+        }
       }
     }
   }

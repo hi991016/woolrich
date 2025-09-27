@@ -13,6 +13,8 @@ const init = () => {
   ScrollTrigger.refresh();
   // # app height
   appHeight();
+  // # init year
+  initYear();
   // # lazy load
   const ll = new LazyLoad({
     threshold: 100,
@@ -55,6 +57,14 @@ const appHeight = () => {
 };
 window.addEventListener("resize", appHeight);
 
+// ===== init year =====
+const initYear = () => {
+  const years = document.querySelectorAll("[data-years]");
+  years.forEach((n) => {
+    n.textContent = new Date().getFullYear();
+  });
+};
+
 // ===== scroll trigger =====
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,7 +96,7 @@ const initGsap = () => {
       end: "bottom top",
       onEnter: () => switchColor(color),
       onEnterBack: () => i === sections.length - 1 && switchColor(color),
-      onLeave: () => i === sections.length - 1 && switchColor(defaultColor),
+      // onLeave: () => i === sections.length - 1 && switchColor(defaultColor),
       onLeaveBack: () => switchColor(previousColor),
       id: i + 1,
       invalidateOnRefresh: true,
@@ -104,9 +114,9 @@ const initGsap = () => {
         trigger: "[data-diary]",
         start: "top bottom",
         end: "bottom top",
-        markers: false,
-        invalidateOnRefresh: true,
         toggleActions: "play none none reverse",
+        invalidateOnRefresh: true,
+        markers: false,
       },
     });
   });
@@ -121,9 +131,25 @@ const initGsap = () => {
       trigger: "[data-trigger-reservation]",
       start: "top top",
       end: "bottom top",
-      markers: false,
-      invalidateOnRefresh: true,
       toggleActions: "play none none reverse",
+      invalidateOnRefresh: true,
+      markers: false,
+    },
+  });
+
+  // # hide reservation
+  gsap.to("[data-reservation]", {
+    autoAlpha: 0,
+    pointerEvents: "none",
+    duration: 0.3,
+    ease: "sine.inOut",
+    scrollTrigger: {
+      trigger: "[data-footer]",
+      start: "top bottom",
+      end: "bottom bottom",
+      toggleActions: "play none none reverse",
+      invalidateOnRefresh: true,
+      markers: true,
     },
   });
 
